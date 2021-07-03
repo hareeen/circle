@@ -1,0 +1,21 @@
+{
+  "name": "circle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hamerin/circle.git",
+  "author": "hamerin <hamerin04@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "google-auth-library": "^7.2.0",
+    "googleapis": "^80.1.0",
+    "mongoose": "^5.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "@types/ws": "^7.4.6",
+    "tsc-watch": "^4.4.0",
+    "typescript": "^4.3.5"
+  }
+}
