@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "skipLibCheck": true,
+        "incremental": true,
+        "outDir": "dist"
+    },
+    "include": [
+        "src/**/*",
+        "src/.config.json",
+        "src/data/*.json"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
