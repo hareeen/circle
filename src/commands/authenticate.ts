@@ -66,7 +66,7 @@ export async function authenticate(message: Message) {
 
       await dmChannel.send(new MessageEmbed({
         color: Colors.theme,
-        description: `학번을 이 채널에 적어주세요.`
+        description: `학번을 여기에 적어주세요.`
       }))
 
       try {
