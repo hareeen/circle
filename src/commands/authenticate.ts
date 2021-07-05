@@ -1,5 +1,4 @@
 import { Message, MessageEmbed } from 'discord.js'
-import { OAuth2Client } from 'google-auth-library'
 import { google } from 'googleapis'
 import { getConfig } from '../helpers/config'
 import { parseStudentByCode } from '../helpers/spreadsheetutil'

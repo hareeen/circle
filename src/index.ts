@@ -3,12 +3,13 @@ import { google, sheets_v4 } from 'googleapis'
 import { apply } from './commands/apply'
 import { authenticate } from './commands/authenticate'
 import { checkauthentication } from './commands/checkauthentication'
+import { pikapika } from './commands/pikapika'
 import { showcurrentbyplace } from './commands/showcurrentbyplace'
 import { showcurrentbystudent } from './commands/showcurrentbystudent'
 import { showhelp } from './commands/showhelp'
 import { showstatus } from './commands/showstatus'
 import { getConfig } from './helpers/config'
-import { User, getUser } from './helpers/user'
+import { getUser, User } from './helpers/user'
 import { Colors } from './helpers/util'
 
 const PREFIX = '라미야 '
@@ -29,7 +30,8 @@ const commands2 = {
   "현황": showstatus,
   "보기": showcurrentbystudent,
   "실별": showcurrentbyplace,
-  "신청": apply
+  "신청": apply,
+  "피카피카": pikapika
 }
 type command2FunctionType = (message: Message, sheets: sheets_v4.Sheets, params: string[], user: User) => Promise<void>;
 
