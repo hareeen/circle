@@ -13,4 +13,3 @@ export const ErrorMessage = (message?: string): MessageEmbed => {
     description: message
   })
 }
-

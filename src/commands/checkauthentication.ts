@@ -4,7 +4,7 @@ import { getUser } from "../helpers/user";
 export async function checkauthentication(message: Message) {
   const user = await getUser(message.author.id)
 
-  if(user === undefined) {
+  if (user === undefined) {
     await message.channel.send(
       `아직 인증이 되지 않았어요.`
     )

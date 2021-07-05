@@ -24,7 +24,12 @@ export async function authenticate(message: Message) {
   await dmChannel.send(new MessageEmbed({
     title: '인증',
     color: Colors.theme,
-    description: `링크를 방문해서 인증을 완료하고, 코드를 이 채널에 적어주세요.\n${authUrl}`
+    description: `링크를 방문해서 인증을 완료하고, 코드를 DM에 적어주세요.\n${authUrl}`
+  }))
+
+  await message.channel.send(new MessageEmbed({
+    color: Colors.theme,
+    description: "인증 안내가 DM으로 전송되었습니다."
   }))
 
   try {

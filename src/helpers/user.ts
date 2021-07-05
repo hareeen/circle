@@ -42,7 +42,7 @@ export let UserModel: Model<User>;
 export async function getUser(id: string): Promise<User | undefined> {
   const user = await UserModel.findOne({ id: id }).exec();
 
-  if(user === null) return undefined
-  
+  if (user === null) return undefined
+
   return user
 }

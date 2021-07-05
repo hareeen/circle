@@ -9,11 +9,29 @@ export async function apply(message: Message, sheets: sheets_v4.Sheets, params: 
   const config = await getConfig()
 
   try {
-    if (params.length < 3) throw Error;
+    if (params.length < 2) throw Error;
 
-    const rown = params.length === 3 ? parseStudent(user.code)! : parseStudent(params[1])!;
-    const place = params.length === 3 ? parsePlaceToApply(params[1])! : parsePlaceToApply(params[2])!;
-    const mode = params.length === 3 ? parseMode(params[2])! : parseMode(params[3])!;
+    let rown: number, place: string, mode: "1" | "2" | "3";
+
+    if (params.length == 2) {
+      rown = parseStudent(user.code)!
+      place = parsePlaceToApply(params[1])!
+      mode = "3"
+    } else if (params.length == 3) {
+      if (parseStudent(params[1]) === undefined) {
+        rown = parseStudent(user.code)!
+        place = parsePlaceToApply(params[1])!
+        mode = parseMode(params[2])!
+      } else {
+        rown = parseStudent(params[1])!
+        place = parsePlaceToApply(params[2])!
+        mode = "3"
+      }
+    } else {
+      rown = parseStudent(params[1])!
+      place = parsePlaceToApply(params[2])!
+      mode = parseMode(params[3])!
+    }
 
     let valueRanges: sheets_v4.Schema$ValueRange[] = [];
     if (mode === "1" || mode === "3") {
