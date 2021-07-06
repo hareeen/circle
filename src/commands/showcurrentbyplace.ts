@@ -9,34 +9,68 @@ export async function showcurrentbyplace(message: Message, sheets: sheets_v4.She
   const config = await getConfig()
 
   try {
-    if (params.length < 3) throw Error
+    if (params.length < 2) throw Error
 
-    const mode = parseMode(params[2])!
-    if (mode === "3") throw Error
+    const { name, ranges } = parsePlaceToShow(params[1])!
 
-    const { name, ranges } = parsePlaceToShow(params[1], (mode as "1" | "2"))!
+    const embed = new MessageEmbed({
+      title: `${name} 현황`,
+      color: Colors.theme
+    })
 
-    const valueRanges = (await sheets.spreadsheets.values.batchGet({
-      spreadsheetId: config.google.spreadsheetId,
-      ranges: ranges
-    })).data.valueRanges!
+    if(ranges["1"] !== undefined) {
+      const valueRanges = (await sheets.spreadsheets.values.batchGet({
+        spreadsheetId: config.google.spreadsheetId,
+        ranges: ranges["1"]
+      })).data.valueRanges!
+  
+      let students: string[] = []
+      for (const valueRange of valueRanges) {
+        const rows = valueRange.values || ['', '']
+        rows.forEach(row => {
+          if (row[0] !== undefined && row[0] !== '') {
+            students.push(`${row[0]} ${row[1]}`)
+          }
+        })
+      }
 
-    let students: string[] = []
-    for (const valueRange of valueRanges) {
-      const rows = valueRange.values || ['', '']
-      rows.forEach(row => {
-        if (row[0] !== undefined && row[0] !== '') {
-          students.push(`${row[0]} ${row[1]}`)
-        }
-      })
+      const description = students.join("\n").trim() || "아무도 없어요!"
+    
+      embed.addField(
+        `1교시 (${students.length}명)`,
+        description,
+        true
+      )
+    }
+    
+    if(ranges["2"] !== undefined) {
+      const valueRanges = (await sheets.spreadsheets.values.batchGet({
+        spreadsheetId: config.google.spreadsheetId,
+        ranges: ranges["2"]
+      })).data.valueRanges!
+  
+      let students: string[] = []
+      for (const valueRange of valueRanges) {
+        const rows = valueRange.values || ['', '']
+        rows.forEach(row => {
+          if (row[0] !== undefined && row[0] !== '') {
+            students.push(`${row[0]} ${row[1]}`)
+          }
+        })
+      }
+
+      const description = students.join("\n").trim() || "아무도 없어요!"
+    
+      embed.addField(
+        `2교시 (${students.length}명)`,
+        description,
+        true
+      )
     }
 
-    const description = students.join("\n").trim()
-    await message.channel.send(new MessageEmbed({
-      title: `${name} ${mode}교시 현황`,
-      color: Colors.theme,
-      description: description || "아무도 없어요!"
-    }).setFooter(`총 ${students.length}명`))
+    await message.channel.send(
+      embed
+    )
   } catch (e) {
     await message.channel.send(
       ErrorMessage()

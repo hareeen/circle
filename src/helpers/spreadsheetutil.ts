@@ -69,18 +69,21 @@ export function parsePlaceToApply(place: string): string | undefined {
   return undefined
 }
 
-export function parsePlaceToShow(place: string, period: "1" | "2"): {
+export function parsePlaceToShow(place: string): {
   name: string,
-  ranges: string[]
+  ranges: {
+    "1": string[] | undefined
+    "2": string[] | undefined
+  }
 } | undefined {
   for (const [key, value] of Object.entries(showData)) {
     if ((value as ShowDataValue).aliases.includes(place)) {
-      const ranges = (value as ShowDataValue).ranges[period]
-      if (ranges === undefined) return undefined
-
       return {
         name: key,
-        ranges: ranges
+        ranges: {
+          "1": (value as ShowDataValue).ranges["1"],
+          "2": (value as ShowDataValue).ranges["2"]
+        }
       }
     }
   }
