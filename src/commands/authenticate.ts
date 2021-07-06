@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from 'discord.js'
 import { google } from 'googleapis'
 import { getConfig } from '../helpers/config'
 import { parseStudentByCode } from '../helpers/spreadsheetutil'
-import { UserModel } from '../helpers/user'
+import { updateUser, UserModel } from '../helpers/user'
 import { Colors, ErrorMessage } from '../helpers/util'
 
 export async function authenticate(message: Message) {
@@ -77,14 +77,14 @@ export async function authenticate(message: Message) {
             errors: ['time']
           }
         )).first()
-
-        await new UserModel({
+        
+        await updateUser({
           id: dmChannel.recipient.id,
           code: codereply!.content,
           name: name,
           email: email,
           installed: token
-        }).save()
+        })
 
         await dmChannel.send(new MessageEmbed({
           title: "인증 성공",

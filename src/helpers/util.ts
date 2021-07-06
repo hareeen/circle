@@ -13,3 +13,7 @@ export const ErrorMessage = (message?: string): MessageEmbed => {
     description: message
   })
 }
+
+export const randInt = (from: number, to: number): number => {
+  return Math.floor(Math.random() * (to - from) + from)
+}

@@ -3,6 +3,7 @@ import { google, sheets_v4 } from 'googleapis'
 import { apply } from './commands/apply'
 import { authenticate } from './commands/authenticate'
 import { checkauthentication } from './commands/checkauthentication'
+import { cute } from './commands/cute'
 import { pikapika } from './commands/pikapika'
 import { showcurrentbyplace } from './commands/showcurrentbyplace'
 import { showcurrentbystudent } from './commands/showcurrentbystudent'
@@ -22,7 +23,8 @@ client.on('ready', () => {
 const commands1 = {
   "인증": authenticate,
   "누구야": checkauthentication,
-  "도움말": showhelp
+  "도움말": showhelp,
+  "귀여워": cute
 }
 type command1FunctionType = (message: Message) => Promise<void>
 
@@ -51,7 +53,7 @@ client.on('message', async message => {
 
     if(!Object.keys(commands2).includes(params[0])) return
 
-    const user = await getUser(message.author.id)
+    const user = (await getUser(message.author.id))?.toObject() as User
     if(user === undefined) {
       await message.channel.send(new MessageEmbed({
         color: Colors.theme,
@@ -64,13 +66,13 @@ client.on('message', async message => {
     const oAuth2Client = new google.auth.OAuth2(
       client_id, client_secret, redirect_uris[0]
     )
-    oAuth2Client.setCredentials(user!.installed)
+    oAuth2Client.setCredentials(user.installed)
     
     const sheets = google.sheets({ version: 'v4', auth: oAuth2Client })
     
     for(const [key, value] of Object.entries(commands2)) {
       if(key === params[0]) {
-        await (value as command2FunctionType)(message, sheets, params, user!);
+        await (value as command2FunctionType)(message, sheets, params, user);
       }
     }
   }

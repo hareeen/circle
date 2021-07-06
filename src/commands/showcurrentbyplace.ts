@@ -36,7 +36,7 @@ export async function showcurrentbyplace(message: Message, sheets: sheets_v4.She
       title: `${name} ${mode}교시 현황`,
       color: Colors.theme,
       description: description || "아무도 없어요!"
-    }))
+    }).setFooter(`총 ${students.length}명`))
   } catch (e) {
     await message.channel.send(
       ErrorMessage()

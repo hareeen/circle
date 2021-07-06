@@ -1,5 +1,5 @@
 import { Credentials } from "google-auth-library";
-import { Schema, Model, createConnection, Connection } from "mongoose";
+import { Schema, Model, createConnection, Connection, Document } from "mongoose";
 import { getConfig } from "./config";
 
 export interface User {
@@ -39,10 +39,16 @@ export let UserModel: Model<User>;
   UserModel = connection.model<User>('User', userSchema)
 })();
 
-export async function getUser(id: string): Promise<User | undefined> {
-  const user = await UserModel.findOne({ id: id }).exec();
+export async function getUser(id: string): Promise<Document<User> | null> {
+  return await UserModel.findOne({ id: id });
+}
 
-  if (user === null) return undefined
+export async function updateUser(user: User) {
+  const userSaved = await getUser(user.id)
 
-  return user
+  if(!userSaved) await new UserModel(user).save()
+  else {
+    userSaved?.overwrite(user)
+    userSaved?.save()
+  }
 }
