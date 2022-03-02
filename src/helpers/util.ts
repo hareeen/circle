@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js'
 
 export const Colors = {
-  'theme': 0xffa200,
+  'theme': 0x8aeec9,
   'success': 0x00ff00,
   'failure': 0xff0000
 }
