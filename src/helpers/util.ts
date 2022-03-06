@@ -2,8 +2,8 @@ import { MessageEmbed } from 'discord.js'
 
 export const Colors = {
   'theme': 0x8aeec9,
-  'success': 0x00ff00,
-  'failure': 0xff0000
+  'success': 0x8aed8a,
+  'failure': 0xed8a8a
 }
 
 export const ErrorMessage = (message?: string): MessageEmbed => {
