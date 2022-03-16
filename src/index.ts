@@ -1,5 +1,6 @@
 import { Client, Message, MessageEmbed } from 'discord.js'
 import { google, sheets_v4 } from 'googleapis'
+import { airplane } from './commands/airplane'
 import { apply } from './commands/apply'
 import { authenticate } from './commands/authenticate'
 import { checkauthentication } from './commands/checkauthentication'
@@ -26,7 +27,8 @@ const commands1 = {
   "누구야": checkauthentication,
   "도움말": showhelp,
   "귀여워": cute,
-  "굴려": roll
+  "굴려": roll,
+  "비행기모드": airplane
 }
 type command1FunctionType = (message: Message, params: string[]) => Promise<void>
 

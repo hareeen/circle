@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import { Colors, randInt } from "../helpers/util";
 
-export async function cute(message: Message, params: string[]) {
+export async function airplane(message: Message, params: string[]) {
   if (randInt(0, 10) === 0) {
     await message.channel.send(`비행기모드가 모에요오?? 막 비행기로 바뀌어서 날아가나???`)
   } else {
