@@ -18,7 +18,7 @@ function evaluateDice(dice: SingleTypeDice[]): number[] {
 }
 
 function parseSingleTypeDice(str: string): SingleTypeDice {
-  const intregex = /[0-9]+/
+  const intregex = /^[0-9]+$/
 
   const splitted = str.split("d")
   if (splitted.length !== 2) throw new Error()
@@ -37,7 +37,7 @@ function parseSingleTypeDice(str: string): SingleTypeDice {
 export async function roll(message: Message, params: string[]) {
   try {
     const diceStrings = params.slice(1)
-    const dice = diceStrings.map(parseSingleTypeDice)
+    const dice: SingleTypeDice[] = diceStrings === [] ? [{quantity: 1, max: 100}] : diceStrings.map(parseSingleTypeDice)
     const evaluated = evaluateDice(dice)
     const total = evaluated.reduce((acc, val) => acc + val, 0)
     const average = total / evaluated.length
@@ -62,5 +62,4 @@ export async function roll(message: Message, params: string[]) {
   } catch (e) {
     await message.channel.send(ErrorMessage())
   }
-
 }
