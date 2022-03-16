@@ -5,6 +5,7 @@ import { authenticate } from './commands/authenticate'
 import { checkauthentication } from './commands/checkauthentication'
 import { cute } from './commands/cute'
 import { pikapika } from './commands/pikapika'
+import { roll } from './commands/roll'
 import { showcurrentbyplace } from './commands/showcurrentbyplace'
 import { showcurrentbystudent } from './commands/showcurrentbystudent'
 import { showhelp } from './commands/showhelp'
@@ -24,9 +25,10 @@ const commands1 = {
   "인증": authenticate,
   "누구야": checkauthentication,
   "도움말": showhelp,
-  "귀여워": cute
+  "귀여워": cute,
+  "굴려": roll
 }
-type command1FunctionType = (message: Message) => Promise<void>
+type command1FunctionType = (message: Message, params: string[]) => Promise<void>
 
 const commands2 = {
   "현황": showstatus,
@@ -47,7 +49,7 @@ client.on('message', async message => {
 
     for(const [key, value] of Object.entries(commands1)) {
       if(key === params[0]) {
-        await (value as command1FunctionType)(message);
+        await (value as command1FunctionType)(message, params);
       }
     }
 

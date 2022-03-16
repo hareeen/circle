@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import { sheets_v4 } from "googleapis";
 import { getConfig } from "../helpers/config";
-import { parseMode, parsePlaceToShow } from "../helpers/spreadsheetutil";
+import { parsePlaceToShow } from "../helpers/spreadsheetutil";
 import { User } from "../helpers/user";
 import { Colors, ErrorMessage } from "../helpers/util";
 

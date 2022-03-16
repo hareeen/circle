@@ -2,10 +2,10 @@ import { Message, MessageEmbed } from 'discord.js'
 import { google } from 'googleapis'
 import { getConfig } from '../helpers/config'
 import { parseStudentByCode } from '../helpers/spreadsheetutil'
-import { updateUser, UserModel } from '../helpers/user'
+import { updateUser } from '../helpers/user'
 import { Colors, ErrorMessage } from '../helpers/util'
 
-export async function authenticate(message: Message) {
+export async function authenticate(message: Message, params: string[]) {
   const config = await getConfig()
 
   const {client_secret, client_id, redirect_uris} = config.google.installed

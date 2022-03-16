@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import { Colors, randInt } from "../helpers/util";
 
-export async function cute(message: Message) {
+export async function cute(message: Message, params: string[]) {
   if (randInt(0, 5) === 0) {
     await message.channel.send(new MessageEmbed({
       color: Colors.theme

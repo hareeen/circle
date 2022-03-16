@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { getUser } from "../helpers/user";
 
-export async function checkauthentication(message: Message) {
+export async function checkauthentication(message: Message, params: string[]) {
   const user = await getUser(message.author.id)
 
   if (!user) {
