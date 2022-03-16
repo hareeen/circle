@@ -37,7 +37,7 @@ function parseSingleTypeDice(str: string): SingleTypeDice {
 export async function roll(message: Message, params: string[]) {
   try {
     const diceStrings = params.slice(1)
-    const dice: SingleTypeDice[] = diceStrings === [] ? [{quantity: 1, max: 100}] : diceStrings.map(parseSingleTypeDice)
+    const dice: SingleTypeDice[] = diceStrings.length === 0 ? [{quantity: 1, max: 100}] : diceStrings.map(parseSingleTypeDice)
     const evaluated = evaluateDice(dice)
     const total = evaluated.reduce((acc, val) => acc + val, 0)
     const average = total / evaluated.length
