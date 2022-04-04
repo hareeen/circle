@@ -1,5 +1,4 @@
 import { Message, MessageEmbed } from "discord.js";
-import { validateCode } from "../helpers/spreadsheetutil";
 import { Colors, ErrorMessage, randInt } from "../helpers/util";
 
 const QUANTITY_LIMIT = 300
