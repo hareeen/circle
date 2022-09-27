@@ -16,13 +16,13 @@ export async function showstatus(message: Message, sheets: sheets_v4.Sheets, par
 
     const embed1 = new MessageEmbed().setTitle("1교시 이석신청 현황").setColor(Colors.theme)
     rows1.values!.forEach(row => {
-      if (row[0] !== undefined && row[0] !== '') {
+      if (row[0] !== undefined && row[0] !== '' && parseInt(row[1]) > 0) {
         embed1.addField(row[0], `${row[2]} / ${row[1]}`)
       }
     })
     const embed2 = new MessageEmbed().setTitle("2교시 이석신청 현황").setColor(Colors.theme)
     rows2.values!.forEach(row => {
-      if (row[0] !== undefined && row[0] !== '') {
+      if (row[0] !== undefined && row[0] !== '' && parseInt(row[1]) > 0) {
         embed2.addField(row[0], `${row[2]} / ${row[1]}`)
       }
     })
@@ -31,7 +31,7 @@ export async function showstatus(message: Message, sheets: sheets_v4.Sheets, par
     await message.channel.send(embed2)
   } catch (e) {
     await message.channel.send(
-      ErrorMessage()
+      ErrorMessage((e as Error).name)
     )
   }
 

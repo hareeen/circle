@@ -13,19 +13,20 @@ export async function showcurrentbystudent(message: Message, sheets: sheets_v4.S
 
     const row = (await sheets.spreadsheets.values.get({
       spreadsheetId: config.google.spreadsheetId,
-      range: `학생 신청!A${rown}:H${rown}`
+      range: `학생 신청!A${rown}:P${rown}`
     })).data.values![0]
 
     const embed = new MessageEmbed().setTitle(`${row[0]} ${row[1]}의 현재 신청`).setColor(Colors.theme)
     embed.addField("1교시", row[4])
     embed.addField("2교시", row[7])
+    embed.addField("퇴사", row[15] !== undefined ? "승인" : row[14] === undefined ? "미신청" : "신청 및 미승인")
 
     await message.channel.send(
       embed
     )
   } catch (e) {
     await message.channel.send(
-      ErrorMessage()
+      ErrorMessage((e as Error).name)
     )
   }
 }

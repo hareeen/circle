@@ -6,6 +6,7 @@ import { authenticate } from './commands/authenticate'
 import { checkauthentication } from './commands/checkauthentication'
 import { cute } from './commands/cute'
 import { double } from './commands/double'
+import { leave } from './commands/leave'
 import { pikapika } from './commands/pikapika'
 import { roll } from './commands/roll'
 import { showcurrentbyplace } from './commands/showcurrentbyplace'
@@ -41,6 +42,7 @@ const commands2 = {
   "트리플보기": triple,
   "실별": showcurrentbyplace,
   "신청": apply,
+  "퇴사": leave,
   "피카피카": pikapika
 }
 type command2FunctionType = (message: Message, sheets: sheets_v4.Sheets, params: string[], user: User) => Promise<void>;

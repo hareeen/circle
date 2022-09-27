@@ -73,7 +73,7 @@ export async function showcurrentbyplace(message: Message, sheets: sheets_v4.She
     )
   } catch (e) {
     await message.channel.send(
-      ErrorMessage()
+      ErrorMessage((e as Error).name)
     )
   }
 

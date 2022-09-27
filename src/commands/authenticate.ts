@@ -104,7 +104,7 @@ export async function authenticate(message: Message, params: string[]) {
       }
     } catch (e) {
       await dmChannel.send(
-        ErrorMessage("인증에 실패하였습니다.")
+        ErrorMessage(`인증에 실패하였습니다. (${(e as Error).name})`)
       )
     }
   } catch (e) {

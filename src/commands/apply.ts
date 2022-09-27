@@ -9,29 +9,31 @@ export async function apply(message: Message, sheets: sheets_v4.Sheets, params: 
   const config = await getConfig()
 
   try {
-    if (params.length < 2) throw Error;
+    if (params.length < 2) throw new Error();
 
-    let rown: number, place: string, mode: "1" | "2" | "3";
+    let rown: number | undefined, place: string | undefined, mode: "1" | "2" | "3" | undefined;
 
     if (params.length == 2) {
-      rown = parseStudent(user.code)!
-      place = parsePlaceToApply(params[1])!
+      rown = parseStudent(user.code)
+      place = parsePlaceToApply(params[1])
       mode = "3"
     } else if (params.length == 3) {
       if (parseStudent(params[1]) === undefined) {
-        rown = parseStudent(user.code)!
-        place = parsePlaceToApply(params[1])!
-        mode = parseMode(params[2])!
+        rown = parseStudent(user.code)
+        place = parsePlaceToApply(params[1])
+        mode = parseMode(params[2])
       } else {
-        rown = parseStudent(params[1])!
-        place = parsePlaceToApply(params[2])!
+        rown = parseStudent(params[1])
+        place = parsePlaceToApply(params[2])
         mode = "3"
       }
     } else {
-      rown = parseStudent(params[1])!
-      place = parsePlaceToApply(params[2])!
-      mode = parseMode(params[3])!
+      rown = parseStudent(params[1])
+      place = parsePlaceToApply(params[2])
+      mode = parseMode(params[3])
     }
+
+    if (rown === undefined || place === undefined || mode === undefined) throw new Error()
 
     let valueRanges: sheets_v4.Schema$ValueRange[] = [];
     if (mode === "1" || mode === "3") {
@@ -67,7 +69,7 @@ export async function apply(message: Message, sheets: sheets_v4.Sheets, params: 
     }))
   } catch (e) {
     await message.channel.send(
-      ErrorMessage()
+      ErrorMessage((e as Error).name)
     )
   }
 }
