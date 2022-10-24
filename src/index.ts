@@ -49,6 +49,7 @@ type command2FunctionType = (message: Message, sheets: sheets_v4.Sheets, params:
 
 client.on('message', async message => {
   if (message.author.bot) return;
+  if (message.channel.type === "dm") return;
 
   if (message.content.startsWith(PREFIX)) {
     const params = message.content.slice(PREFIX.length).trim().split(" ")
